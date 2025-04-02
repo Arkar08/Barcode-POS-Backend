@@ -28,7 +28,7 @@ export const postCategoryController = async(req,res)=>{
             message:"Object key is wrong. Plz check Object Key"
         })
     }
-    if(!categoryName && categoryName === undefined){
+    if(!categoryName){
         return res.status(404).json({
             status:404,
             success:false,
@@ -36,7 +36,6 @@ export const postCategoryController = async(req,res)=>{
         })
     }
     try {
-       if(categoryName !== undefined){
         const dataPass = await findCategoryService(categoryName)
         if(dataPass.length === 1){
             return res.status(400).json({
@@ -56,7 +55,6 @@ export const postCategoryController = async(req,res)=>{
                     data:createData
                 })
             }
-        }
        }
     } catch (error) {
         console.log(error , 'post categroy controller error is')
