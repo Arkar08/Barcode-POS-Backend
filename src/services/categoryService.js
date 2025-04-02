@@ -1,7 +1,7 @@
 import { db } from "../server.js";
 
 
-export const getCategroyService = (async()=>{
+export const getCategroyService = async()=>{
     let dataPass = []
     await db.query('SELECT * FROM category').then((data)=>{
         return dataPass = data[0];
@@ -9,7 +9,7 @@ export const getCategroyService = (async()=>{
         console.log(error, 'getCategory db error is')
     })
     return dataPass;
-})
+}
 
 export const postCategoryService = async(categroy)=>{
     let dataPass = []
@@ -20,7 +20,6 @@ export const postCategoryService = async(categroy)=>{
     })
     return dataPass;
 }
-
 
 export const findCategoryService = async(category) =>{
     let dataPass = []
@@ -51,7 +50,6 @@ export const patchCategoryService = async(category)=>{
     })
     return dataPass;
 }
-
 
 export const deleteCategoryService = async(categoryId)=>{
         let dataPass = []
