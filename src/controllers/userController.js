@@ -11,8 +11,8 @@ export const getUserController = async(req,res)=>{
         })
     } catch (error) {
         console.log(error , 'getUser error is')
-        return res.status(400).json({
-            status:400,
+        return res.status(500).json({
+            status:500,
             success:false,
             message:error
         })
