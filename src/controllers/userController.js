@@ -101,7 +101,7 @@ export const getIdUserController = async(req,res)=>{
 
 export const patchUserController = async(req,res)=>{
     const params = req.params.id;
-    const{fullName,email,password,role,companyName,state,township,address,description} = req.body;
+    const{fullName,email,password,roleId,companyName,state,township,address,description} = req.body;
     if(isNaN(params)){
         return res.status(404).json({
             status:404,
@@ -115,7 +115,7 @@ export const patchUserController = async(req,res)=>{
             fullName:fullName,
             email:email,
             password:password,
-            role:role,
+            role:roleId,
             companyName:companyName,
             state:state,
             township:township,
