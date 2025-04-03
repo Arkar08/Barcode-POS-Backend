@@ -36,13 +36,13 @@ export const postOrderController = async(req,res)=>{
         const orderId = Number(lastOrder[lastOrder.length - 1].orderNo.slice(5))?Number(lastOrder[lastOrder.length - 1].orderNo.slice(5)) + 1 :1
         const voucherId = (number) => {
             let string = '';
-            let modifyNumber = 4 - number
+            let modifyNumber = 6 - number
             for(let i = 0; i< modifyNumber ; i++){
                 string = string + '0'
             }
             return string;
         }
-        const orderNo = `Order${voucherId(orderId.toString().length)+orderId.toString()}` ;
+        const orderNo = `OrderNo-${voucherId(orderId.toString().length)+orderId.toString()}` ;
 
         const priceList = productLists.map((product)=>{
             return product.price;
