@@ -3,7 +3,6 @@ import {deleteUserController, getIdUserController, getUserController, patchUserC
 
 const router = express.Router()
 
-
 router.get('/', getUserController)
 router.post("/",postUserController)
 router.get("/:id",getIdUserController)

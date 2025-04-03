@@ -150,8 +150,6 @@ export const patchProductController = async(req,res)=>{
     }
 }
 
-
-
 export const deleteProductController = async(req,res)=>{
     const params = req.params.id;
     if(isNaN(params)){
