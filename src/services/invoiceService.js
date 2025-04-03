@@ -1,4 +1,4 @@
-import { db } from "../src/server.js";
+import { db } from "../server.js";
 
 export const getInvoiceService = async()=>{
         let dataPass = []

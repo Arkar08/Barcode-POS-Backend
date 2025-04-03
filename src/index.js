@@ -1,10 +1,10 @@
 import express from 'express'
 import cors from 'cors'
-import userRoute from '../routes/user.js'
-import categoryRoute from '../routes/category.js'
-import productRoute from '../routes/products.js'
-import orderRoute from '../routes/orders.js'
-import invoiceRoute from '../routes/invoice.js'
+import userRoute from './routes/user.js'
+import categoryRoute from './routes/category.js'
+import productRoute from './routes/products.js'
+import orderRoute from './routes/orders.js'
+import invoiceRoute from './routes/invoice.js'
 
 const app = express()
 
