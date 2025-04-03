@@ -34,7 +34,6 @@ export const postOrderController = async(req,res)=>{
 
         const lastOrder = await getOrderService()
         const orderId = Number(lastOrder[lastOrder.length - 1].orderNo.slice(8))?Number(lastOrder[lastOrder.length - 1].orderNo.slice(8)) + 1 :1
-        console.log(orderId)
         const voucherId = (number) => {
             let string = '';
             let modifyNumber = 6 - number
