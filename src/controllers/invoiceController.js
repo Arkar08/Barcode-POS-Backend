@@ -1,4 +1,4 @@
-import { findInvoiceService, getIdInvoiceService, getInvoiceService, postInvoiceService } from "../services/invoiceService.js"
+import { findInvoiceService, findorderInvoiceService, getIdInvoiceService, getInvoiceService, postInvoiceService } from "../services/invoiceService.js"
 
 export const getInvoiceController = async(req,res)=>{
     try {
@@ -40,23 +40,35 @@ export const postInvoiceController = async(req,res)=>{
             }
             return string;
         }
-    const invoiceNo = `InvoiceNo-${voucherId(Invoice.toString().length)+Invoice.toString()}` ;
+        const invoiceNo = `InvoiceNo-${voucherId(Invoice.toString().length)+Invoice.toString()}` ;
     
         const invoice = {
             invoiceNo:invoiceNo,
             orderId:orderId
         }
-        const data = await postInvoiceService(invoice)
-        if(data.length === 2){
-            const createData = await findInvoiceService(invoice)
-                return res.status(201).json({
-                status:201,
-                success:true,
-                message:"Create Invoice Successfully.",
-                data:createData
+
+        const findOrder = await findorderInvoiceService(orderId)
+        if(findOrder.length === 0){
+             const data = await postInvoiceService(invoice)
+            if(data.length === 2){
+                const createData = await findInvoiceService(invoice)
+                    return res.status(201).json({
+                    status:201,
+                    success:true,
+                    message:"Create Invoice Successfully.",
+                    data:createData
+                })
+            }
+        }
+        if(findOrder.length > 0){
+            return res.status(400).json({
+                status:400,
+                success:false,
+                message:"Invoice already exists.",
             })
         }
 
+       
     } catch (error) {
         console.log(error , 'post invoice controller error is')
            return res.status(500).json({

@@ -39,3 +39,13 @@ export const findInvoiceService = async(invoice) =>{
     })
     return dataPass;
 }
+
+export const findorderInvoiceService = async(orderId)=>{
+    let dataPass = []
+    await db.query(`SELECT * FROM INVOICE WHERE orderId = "${orderId}"`).then((data)=>{
+        return dataPass = data[0];
+    }).catch((error)=>{
+        console.log(error ,'find invoice db error is')
+    })
+    return dataPass;
+}
