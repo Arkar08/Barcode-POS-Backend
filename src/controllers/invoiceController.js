@@ -31,7 +31,7 @@ export const postInvoiceController = async(req,res)=>{
 
     try {
         const lastInvoice = await getInvoiceService()
-        const Invoice = Number(lastInvoice[lastInvoice.length - 1].invoiceNo.slice(5))? Number(lastInvoice[lastInvoice.length - 1].invoiceNo.slice(5)) + 1 :1
+        const Invoice = Number(lastInvoice[lastInvoice.length - 1].invoiceNo.slice(10))? Number(lastInvoice[lastInvoice.length - 1].invoiceNo.slice(10)) + 1 :1
         const voucherId = (number) => {
             let string = '';
             let modifyNumber = 6 - number
