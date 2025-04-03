@@ -1,4 +1,4 @@
-import { db } from "../server.js";
+import { db } from "../src/server.js";
 
 export const getOrderService = async()=>{
         let dataPass = []

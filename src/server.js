@@ -1,7 +1,7 @@
 import app from './index.js'
 import http from 'http'
 import dotenv from 'dotenv'
-import mysqlPool from './db/db.js';
+import mysqlPool from '../db/db.js';
 
 dotenv.config();
 
