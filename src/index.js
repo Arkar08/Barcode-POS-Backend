@@ -5,6 +5,7 @@ import categoryRoute from './routes/category.js'
 import productRoute from './routes/products.js'
 import orderRoute from './routes/orders.js'
 import invoiceRoute from './routes/invoice.js'
+import findRoute from './routes/find.js'
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use("/api/v1/category",categoryRoute)
 app.use("/api/v1/products",productRoute)
 app.use("/api/v1/orders",orderRoute)
 app.use("/api/v1/invoice",invoiceRoute)
+app.use("/api/v1/find",findRoute)
 
 
 
