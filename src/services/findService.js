@@ -52,7 +52,7 @@ export const findCustomerService = async () => {
     let dataPass = [];
     await db
       .query(
-        `SELECT stockLevel from products where productName= "${productName}"`
+        `SELECT stockLevel,price from products where productName= "${productName}"`
       )
       .then((data) => {
         return (dataPass = data[0]);
