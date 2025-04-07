@@ -33,7 +33,7 @@ export const postOrderController = async(req,res)=>{
     try {  
 
         const lastOrder = await getOrderService()
-        const orderId = Number(lastOrder[lastOrder.length - 1].orderNo.slice(8))?Number(lastOrder[lastOrder.length - 1].orderNo.slice(8)) + 1 :1
+        const orderId = Number(lastOrder[lastOrder.length - 1].orderNo.slice(8)) || lastOrder.length !== 0 ? Number(lastOrder[lastOrder.length - 1].orderNo.slice(8)) + 1 : 1
         const voucherId = (number) => {
             let string = '';
             let modifyNumber = 6 - number
@@ -43,6 +43,7 @@ export const postOrderController = async(req,res)=>{
             return string;
         }
         const orderNo = `OrderNo-${voucherId(orderId.toString().length)+orderId.toString()}` ;
+        console.log(orderNo)
 
         const priceList = productLists.map((product)=>{
             return product.price;
@@ -55,9 +56,9 @@ export const postOrderController = async(req,res)=>{
         const order = {
             orderNo:orderNo,
             userId:userId,
-            quantity:productLists.length,
-            promotion:promotion,
-            totalAmount:total,
+            quantity:Number(productLists.length),
+            promotion:Number(promotion),
+            totalAmount:Number(total),
             payment:payment,
             productLists:JSON.stringify(productLists)
         }

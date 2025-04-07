@@ -30,4 +30,36 @@ export const findCustomerService = async () => {
       });
     return dataPass;
   };
+
+  export const findProductService= async () => {
+    let dataPass = [];
+    await db
+      .query(
+        "SELECT productName as value from products"
+      )
+      .then((data) => {
+        return (dataPass = data[0]);
+      })
+      .catch((error) => {
+        console.log(error, "find product db error is");
+      });
+    return dataPass;
+  };
+
+
+  // query params
+  export const findStockService= async (productName) => {
+    let dataPass = [];
+    await db
+      .query(
+        `SELECT stockLevel from products where productName= "${productName}"`
+      )
+      .then((data) => {
+        return (dataPass = data[0]);
+      })
+      .catch((error) => {
+        console.log(error, "find product db error is");
+      });
+    return dataPass;
+  };
   
