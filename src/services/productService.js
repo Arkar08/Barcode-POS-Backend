@@ -32,7 +32,7 @@ export const findProductService = async(product) =>{
 
 export const getIdProductService = async(productId)=>{
     let dataPass = []
-    await db.query(`SELECT productId, productName, categoryName,fullName,stockLevel,price,description FROM PRODUCTS LEFT JOIN CATEGORY ON PRODUCTS.CATEGORYID = CATEGORY.CATEGORYID LEFT JOIN USER ON PRODUCTS.USERID = USER.USERID WHERE productId = ${productId}`).then((data)=>{
+    await db.query(`SELECT * FROM PRODUCTS WHERE productId = ${productId}`).then((data)=>{
         return dataPass = data[0]
     }).catch((error)=>{
         console.log(error ,'find prodcut db error is')
