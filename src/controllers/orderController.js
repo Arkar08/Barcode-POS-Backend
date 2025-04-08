@@ -43,7 +43,6 @@ export const postOrderController = async(req,res)=>{
             return string;
         }
         const orderNo = `OrderNo-${voucherId(orderId.toString().length)+orderId.toString()}` ;
-        console.log(orderNo)
 
         const priceList = productLists.map((product)=>{
             return product.price;
