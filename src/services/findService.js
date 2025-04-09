@@ -67,7 +67,7 @@ import { db } from "../server.js";
     let dataPass = [];
     await db
       .query(
-        "SELECT * as value from role"
+        "SELECT roleId as value, roleName as label from role"
       )
       .then((data) => {
         return (dataPass = data[0]);
