@@ -63,3 +63,18 @@ import { db } from "../server.js";
     return dataPass;
   };
   
+  export const findRoleService = async()=>{
+    let dataPass = [];
+    await db
+      .query(
+        "SELECT * as value from role"
+      )
+      .then((data) => {
+        return (dataPass = data[0]);
+      })
+      .catch((error) => {
+        console.log(error, "find role db error is");
+      });
+    return dataPass;
+  }
+
