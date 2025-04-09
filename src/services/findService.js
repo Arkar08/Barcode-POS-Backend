@@ -78,3 +78,28 @@ import { db } from "../server.js";
     return dataPass;
   }
 
+
+  export const findStateService = async()=>{
+    let dataPass = [];
+    await db.query(
+      "SELECT stateCode as value,stateName as label from STATE"
+    ).then((data)=>{
+      return dataPass = data[0];
+    })
+    .catch((error)=>{
+      console.log(error,'find state db error is')
+    })
+    return dataPass;
+  }
+
+  export const findTownshipService = async(stateCode)=>{
+    let dataPass = [];
+    await db.query(
+      `SELECT townshipId as value,townshipName as label from TOWNSHIP where stateCode = '${stateCode}'`
+    ).then((data)=>{
+      return dataPass = data[0];
+    }).catch((error)=>{
+      console.log(error,'find township db error is')
+    })
+    return dataPass;
+  }
