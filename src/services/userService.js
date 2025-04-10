@@ -82,7 +82,7 @@ export const findUserService = async(user) =>{
 export const getIdUserService = async(userId)=>{
     let data = []
     let information = []
-    await db.query(`SELECT fullName,email,password,roleId FROM USER  WHERE USERID = ${userId}`).then((res)=>{
+    await db.query(`SELECT * FROM USER  WHERE USERID = ${userId}`).then((res)=>{
         return data = res[0];
     })
     await db.query(`SELECT companyName,state,township,address,description,phNumber FROM INFORMATION WHERE USERID = ${userId}`).then((res)=>{

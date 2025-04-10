@@ -7,6 +7,7 @@ import orderRoute from './routes/orders.js'
 import invoiceRoute from './routes/invoice.js'
 import findRoute from './routes/find.js'
 import authRoute from './routes/auth.js'
+import { authMiddleware, authorizeAdmin } from './middleware/middleware.js'
 
 const app = express()
 
@@ -20,12 +21,12 @@ app.get("/",(req,res)=>{
 })
 
 // routes
-app.use("/api/v1/users",userRoute)
-app.use("/api/v1/category",categoryRoute)
-app.use("/api/v1/products",productRoute)
-app.use("/api/v1/orders",orderRoute)
-app.use("/api/v1/invoice",invoiceRoute)
-app.use("/api/v1/find",findRoute)
+app.use("/api/v1/users",authMiddleware,authorizeAdmin,userRoute)
+app.use("/api/v1/category",authMiddleware,categoryRoute)
+app.use("/api/v1/products",authMiddleware,productRoute)
+app.use("/api/v1/orders",authMiddleware,orderRoute)
+app.use("/api/v1/invoice",authMiddleware,invoiceRoute)
+app.use("/api/v1/find",authMiddleware,findRoute)
 app.use("/api/v1/auth",authRoute)
 
 
