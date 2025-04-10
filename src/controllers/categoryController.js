@@ -7,7 +7,7 @@ export const getCategoryController = async(req,res)=>{
             status:200,
             success:true,
             length:allData.length,
-            data:allData
+            data:allData.reverse()
         })
     } catch (error) {
         console.log(error , 'get categroy controller error is')

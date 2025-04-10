@@ -7,7 +7,7 @@ export const getProductController = async(req,res)=>{
                 status:200,
                 success:true,
                 length:allData.length,
-                data:allData
+                data:allData.reverse()
             })
         } catch (error) {
             console.log(error , 'get product controller error is')

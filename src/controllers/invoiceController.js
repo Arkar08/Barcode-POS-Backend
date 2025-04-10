@@ -7,7 +7,7 @@ export const getInvoiceController = async(req,res)=>{
                status:200,
                success:true,
                length:allData.length,
-               data:allData
+               data:allData.reverse()
            })
        } catch (error) {
            console.log(error , 'get invoice controller error is')
