@@ -95,7 +95,7 @@ import { db } from "../server.js";
   export const findTownshipService = async(stateCode)=>{
     let dataPass = [];
     await db.query(
-      `SELECT townshipId as value,townshipName as label from TOWNSHIP where stateCode = '${stateCode}'`
+      `SELECT townshipCode as value,townshipName as label from TOWNSHIP where stateCode = '${stateCode}'`
     ).then((data)=>{
       return dataPass = data[0];
     }).catch((error)=>{
@@ -103,3 +103,16 @@ import { db } from "../server.js";
     })
     return dataPass;
   }
+
+  export const findTownship1Service = async()=>{
+    let dataPass = [];
+    await db.query(
+      'SELECT townshipCode as value,townshipName as label from TOWNSHIP '
+    ).then((data)=>{
+      return dataPass = data[0];
+    }).catch((error)=>{
+      console.log(error,'find township db error is')
+    })
+    return dataPass;
+  }
+

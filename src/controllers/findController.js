@@ -1,4 +1,4 @@
-import { findCustomerService, findProductService, findRoleService, findStateService, findStockService, findSupplierService, findTownshipService } from "../services/findService.js"
+import { findCustomerService, findProductService, findRoleService, findStateService, findStockService, findSupplierService, findTownship1Service, findTownshipService } from "../services/findService.js"
 
 export const findSupplierController = async(req,res)=>{
     try {
@@ -129,6 +129,26 @@ export const findTownshipController = async(req,res)=>{
         })
     } catch (error) {
         console.log(error , 'find state controller error is')
+           return res.status(500).json({
+               status:500,
+               success:false,
+               message:error.message
+           })
+    }
+}
+
+export const findTownship1Controller = async(req,res)=>{
+
+    try {
+        const allData = await findTownship1Service()
+            return res.status(200).json({
+                status:200,
+                success:true,
+                length:allData.length,
+                data:allData
+        })
+    } catch (error) {
+        console.log(error , 'find township controller error is')
            return res.status(500).json({
                status:500,
                success:false,

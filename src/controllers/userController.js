@@ -20,7 +20,7 @@ export const getUserController = async(req,res)=>{
 }
 
 export const postUserController = async(req,res)=>{
-    const{fullName,email,password,role,state,township,address,description,companyName} = req.body;
+    const{fullName,email,password,role,state,township,address,description,companyName,phNumber} = req.body;
     if(!fullName || !email || !password || !role || !state || !township || !address) {
         return res.status(404).json({
             status:404,
@@ -38,7 +38,8 @@ export const postUserController = async(req,res)=>{
                 township:township,
                 address:address,
                 companyName:companyName,
-                description:description
+                description:description,
+                phNumber:phNumber
             }
             const dataPass = await findUserService(data)
             if(dataPass.length === 1){
@@ -50,7 +51,6 @@ export const postUserController = async(req,res)=>{
             }
             if(dataPass.length < 1){
                  const dataLink = await postUserService(data)
-                 console.log(dataLink.length)
                 if(dataLink.length === 2){
                     const createData = await findUserService(data)
                     return res.status(201).json({

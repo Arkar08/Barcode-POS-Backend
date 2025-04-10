@@ -2,8 +2,8 @@ import { db } from "../server.js";
 
 export const getUserService = async()=>{
     let dataPass = []
-    await db.query('SELECT fullName,email,password,roleName,companyName,state,township,address,description FROM USER LEFT JOIN INFORMATION ON USER.USERID = INFORMATION.USERID LEFT JOIN ROLE ON USER.ROLEID = ROLE.ROLEID;').then((data)=>{
-        return dataPass = data[0];
+    await db.query('SELECT * FROM USER LEFT JOIN INFORMATION ON USER.USERID = INFORMATION.USERID LEFT JOIN ROLE ON USER.ROLEID = ROLE.ROLEID;').then((data)=>{
+        return dataPass = data[0].reverse();
     }).catch((error)=>{
         console.log(error, 'getUser db error is')
     })
@@ -22,12 +22,13 @@ export const postUserService = async(user)=>{
             })
             if (userId !== 0) {
                 const updateResult = await db.query(
-                    'INSERT INTO INFORMATION (COMPANYNAME,STATE,TOWNSHIP,ADDRESS,DESCRIPTION,USERID) VALUE(?,?,?,?,?,?)',[
+                    'INSERT INTO INFORMATION (COMPANYNAME,STATE,TOWNSHIP,ADDRESS,DESCRIPTION,phNumber,USERID) VALUE(?,?,?,?,?,?,?)',[
                         user.companyName,
                         user.state,
                         user.township,
                         user.address,
                         user.description,
+                        user.phNumber,
                         userId
                     ]
             );
@@ -49,10 +50,11 @@ export const postUserService = async(user)=>{
             })
             if (userId !== 0) {
                 const updateResult = await db.query(
-                    'INSERT INTO INFORMATION (STATE,TOWNSHIP,ADDRESS,USERID) VALUE(?,?,?,?)',[
+                    'INSERT INTO INFORMATION (STATE,TOWNSHIP,ADDRESS,phNumber,USERID) VALUE(?,?,?,?,?)',[
                         user.state,
                         user.township,
                         user.address,
+                        user.phNumber,
                         userId
                     ]
             );
@@ -83,7 +85,7 @@ export const getIdUserService = async(userId)=>{
     await db.query(`SELECT fullName,email,password,roleId FROM USER  WHERE USERID = ${userId}`).then((res)=>{
         return data = res[0];
     })
-    await db.query(`SELECT companyName,state,township,address,description FROM INFORMATION WHERE USERID = ${userId}`).then((res)=>{
+    await db.query(`SELECT companyName,state,township,address,description,phNumber FROM INFORMATION WHERE USERID = ${userId}`).then((res)=>{
         return information = res[0]
     })
     const dataPass2 = {...data[0],...information[0]};
@@ -102,13 +104,14 @@ export const patchUserService = async(user)=>{
                 user.id
             ]
         )
-        const updateResult = await db.query('UPDATE INFORMATION SET COMPANYNAME = ? , STATE = ? , TOWNSHIP = ? , ADDRESS = ? , DESCRIPTION = ? WHERE USERID = ?',
+        const updateResult = await db.query('UPDATE INFORMATION SET COMPANYNAME = ? , STATE = ? , TOWNSHIP = ? , ADDRESS = ? , DESCRIPTION = ? ,phNumber = ? WHERE USERID = ?',
             [
                 user.companyName,
                 user.state,
                 user.township,
                 user.address,
                 user.description,
+                user.phNumber,
                 user.id
             ]
         )
