@@ -71,7 +71,7 @@ export const postUserService = async(user)=>{
 
 export const findUserService = async(user) =>{
     let dataPass = []
-    await db.query(`SELECT * FROM  USER WHERE email = "${user.email}"`).then((data)=>{
+    await db.query(`SELECT * FROM USER LEFT JOIN ROLE ON ROLE.ROLEID = USER.ROLEID  WHERE EMAIL = '${user.email}'`).then((data)=>{
         return dataPass = data[0];
     }).catch((error)=>{
         console.log(error ,'find user db error is')
