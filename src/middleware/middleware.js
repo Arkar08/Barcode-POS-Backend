@@ -21,7 +21,7 @@ export const authMiddleware = async(req, res, next) => {
 };
 
 export const authorizeAdmin = (req, res, next) => {
-  if (req.user && req.user.roleId === 3 || req.user && req.user.role === 1) {
+  if (req.user && req.user.roleId === 3 || req.user && req.user.roleId === 1) {
     next();
   } else {
     return res.status(401).json("not authorized as an admin or supplier");

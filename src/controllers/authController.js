@@ -69,8 +69,8 @@ export const signupController = async(req,res)=>{
                             success:true,
                             email: findUserId[0].email,
                             role: findUserId[0].roleName,
-                            token,
-                            id:findUserId[0].userId
+                            id:findUserId[0].userId,
+                            token
                           });
                     }
             }
