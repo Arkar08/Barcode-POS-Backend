@@ -1,4 +1,6 @@
 import { findUserService, getIdUserService, getUserService, postUserService,patchUserService, deleteUserService } from "../services/userService.js"
+import bcrypt from 'bcrypt'
+import generateToken from "../utils/generateToken.js";
 
 export const getUserController = async(req,res)=>{
     try {
@@ -29,10 +31,13 @@ export const postUserController = async(req,res)=>{
         })
     }
     try {
+
+            const salt = await bcrypt.genSalt(10);
+            const hashPassword = await bcrypt.hash(password, salt);
             const data = {
                 fullName:fullName,
                 email:email,
-                password:password,
+                password:hashPassword,
                 role:role,
                 state:state,
                 township:township,
@@ -53,6 +58,7 @@ export const postUserController = async(req,res)=>{
                  const dataLink = await postUserService(data)
                 if(dataLink.length === 2){
                     const createData = await findUserService(data)
+                    const token = await generateToken(res,createData[0].userId)
                     return res.status(201).json({
                         status:201,
                         success:true,
