@@ -35,7 +35,7 @@ import { db } from "../server.js";
     let dataPass = [];
     await db
       .query(
-        "SELECT productName as value from products"
+        "SELECT productName as value,productId as id from products"
       )
       .then((data) => {
         return (dataPass = data[0]);
